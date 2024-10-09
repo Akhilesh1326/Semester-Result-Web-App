@@ -17,19 +17,19 @@ const semesterMarksSchema = new mongoose.Schema({
         type:String,
         required: true
     },
-    DAA:{
+    marksOfDAA:{
         type:String,
         required: true
     },
-    CNT:{
+    marksOfCNT:{
         type:String,
         required: true
     },
-    ANN:{
+    marksOfCC:{
         type:String,
         required: true
     },
-    ANN:{
+    marksOfANN:{
         type:String,
         required: true
     }
