@@ -1,3 +1,4 @@
+const { get } = require("mongoose");
 const {semResult} = require("../Model/SemesterData");
 
 async function AddNewResult(data) {
@@ -6,11 +7,17 @@ async function AddNewResult(data) {
 }
 
 async function ShowAllData(){
-    const result = await semResult.find();
+    const result = await semResult.find({});
+    return result;
+}
+
+async function getSingleUserResult(PRN) {
+    const result = await semResult.find({PRN:PRN})
     return result;
 }
 
 module.exports = {
     AddNewResult,
     ShowAllData,
+    getSingleUserResult
 }
