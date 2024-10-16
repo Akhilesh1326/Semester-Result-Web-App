@@ -16,6 +16,7 @@ const {
     AddNewResult,
     ShowAllData,
     getSingleUserResult,
+    modifyData,
 } = require("./Controller/SemesterResult");
 
 app.post("/api/user/AddNewResult", async(req,res)=>{
@@ -44,15 +45,24 @@ app.get("/api/user/allSemData", async(req,res)=>{
         
     }
 })
-
-app.patch("/api/user/UpdateResultInfo", async(req,res)=>{
+app.put("/api/user/UpdateResultInfo", async (req, res) => {
     try {
-        const allData = req.body;
-        console.log("Data for Modification = ",allData);
+        // Extract data from req.body
+        const { userName, PRN, rollNumber,division, marksOfDAA, marksOfCNT, marksOfCC, marksOfANN } = req.body;
+        console.log(userName, PRN, rollNumber,division, marksOfDAA, marksOfCNT, marksOfCC, marksOfANN);
+
+        // Modify data logic
+        const result = await modifyData(userName, PRN, rollNumber, marksOfDAA, marksOfCNT, marksOfCC, marksOfANN);
+        console.log("Response of modifyData = ", result);
+
+        // Send success response
+        res.json({ msg: "Good" });
     } catch (error) {
-        
+        console.error("Error while updating result info:", error);
+        res.status(500).json({ msg: "Error updating result" });
     }
-})
+});
+
 
 app.post("/api/user/single-user-result",async(req,res)=>{
     try {
