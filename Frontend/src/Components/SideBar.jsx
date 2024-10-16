@@ -70,19 +70,38 @@ const SideBar = () => {
         }
     }
 
-    async function updateResutl() {
-        try {
-            const resp = await axios.patch("/api/user/UpdateResultInfo");
-            console.log("Update response = ",resp);
-            if(resp.data.msg=="Good"){
-                setLoad(false);
-            }else{
-                setLoad(true);
+        async function updateResult() {  // Fixed typo in function name
+            console.log(userName,
+                PRN,
+                rollNumber,
+                division,
+                marksOfDAA,
+                marksOfCNT,
+                marksOfCC,
+                marksOfANN,);
+            try {
+                const resp = await axios.put("/api/user/UpdateResultInfo", {
+                    userName,
+                    PRN,
+                    rollNumber,
+                    division,
+                    marksOfDAA,
+                    marksOfCNT,
+                    marksOfCC,
+                    marksOfANN,
+                });
+                console.log("Update response = ", resp);
+                if (resp.data.msg === "Good") {
+                    setLoad(false);
+                } else {
+                    setLoad(true);
+                }
+            } catch (error) {
+                console.log("Error while updating info:", error);
             }
-        } catch (error) {
-            console.log("ERror while updating info",error)
         }
-    }
+    
+
 
     useEffect(() => {
         console.log(load)
@@ -173,7 +192,7 @@ const SideBar = () => {
                         <input type="text" name="" id="" placeholder="CC Marks" value={marksOfCC} onChange={(e) => { setMarksOfCC(e.target.value) }} />
 
                     </div>
-                    <button>{load ? "|" : "Update Data"}</button>
+                    <button onClick={()=>{updateResult()}}>{load ? "|" : "Update Data"}</button>
 
                 </>) :
                     (<>
