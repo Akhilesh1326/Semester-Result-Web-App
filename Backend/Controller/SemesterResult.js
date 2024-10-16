@@ -16,8 +16,30 @@ async function getSingleUserResult(PRN) {
     return result;
 }
 
+async function modifyData(userName, PRN, rollNumber,division, marksOfDAA, marksOfCNT, marksOfCC, marksOfANN) {
+    const result = await semResult.updateOne(
+
+    { PRN: PRN }, // Filter to find the document by PRN
+    {
+      $set: {
+        
+        userName: userName,
+        PRN: PRN,
+        rollNumber: rollNumber,
+        division: division,
+        marksOfDAA: marksOfDAA,
+        marksOfCNT: marksOfCNT,
+        marksOfCC: marksOfCC,
+        marksOfANN: marksOfANN,
+      }
+    }
+)
+return result
+}
+
 module.exports = {
     AddNewResult,
     ShowAllData,
-    getSingleUserResult
+    getSingleUserResult,
+    modifyData,
 }
