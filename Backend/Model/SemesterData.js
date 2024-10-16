@@ -7,7 +7,8 @@ const semesterMarksSchema = new mongoose.Schema({
     },
     PRN:{
         type:String,
-        required: true
+        required: true,
+        unique:true,
     },
     rollNumber:{
         type:String,
