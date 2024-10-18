@@ -75,10 +75,10 @@ const SideBar = () => {
                 PRN,
                 rollNumber,
                 division,
-                marksOfDAA,
                 marksOfCNT,
                 marksOfCC,
-                marksOfANN,);
+                marksOfANN,
+            );
             try {
                 const resp = await axios.put("/api/user/UpdateResultInfo", {
                     userName,
